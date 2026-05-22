@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,16 +8,16 @@ public class Referto {
     private LocalDate dataCompilazione;
     private String sintomiDichiarati, diagnosi, noteAggiuntive;
     private ArrayList<Prescrizione> prescrizioni;
-    Prenotazione prenotazioneColleagata;
+    Prenotazione prenotazioneCollegata;
 
-    public Referto(int idReferto, LocalDate dataCompilazione, String sintomiDichiarati, String diagnosi, String noteAggiuntive, ArrayList<Prescrizione> prescrizioni, Prenotazione prenotazioneColleagata) {
+    public Referto(int idReferto, LocalDate dataCompilazione, String sintomiDichiarati, String diagnosi, String noteAggiuntive, ArrayList<Prescrizione> prescrizioni, Prenotazione prenotazioneCollegata) {
         this.idReferto = idReferto;
         this.dataCompilazione = dataCompilazione;
         this.sintomiDichiarati = sintomiDichiarati;
         this.diagnosi = diagnosi;
         this.noteAggiuntive = noteAggiuntive;
-        this.prescrizioni = prescrizioni;
-        this.prenotazioneColleagata = prenotazioneColleagata;
+        this.prescrizioni = new ArrayList<>();
+        this.prenotazioneCollegata = prenotazioneCollegata;
     }
 
     public int getIdReferto() {

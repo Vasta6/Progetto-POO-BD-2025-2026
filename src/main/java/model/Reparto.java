@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 
@@ -7,12 +7,12 @@ public class Reparto {
     private String nomeReparto;
     ArrayList<Dipendente>dipendenti;
 
-    public Reparto(int idReparto, int numeroStanze, int piano, String nomeReparto, ArrayList<Dipendente> dipendenti) {
+    public Reparto(int idReparto, int numeroStanze, int piano, String nomeReparto) {
         this.idReparto = idReparto;
         this.numeroStanze = numeroStanze;
         this.piano = piano;
         this.nomeReparto = nomeReparto;
-        this.dipendenti = dipendenti;
+        this.dipendenti = new ArrayList<>();
     }
 
     public int getIdReparto() {

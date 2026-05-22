@@ -1,16 +1,16 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 
 public class Allergia {
     private int id_Allergia;
     private String principioAttivo;
-    ArrayList<Paziente>pazientiallergici;
+    ArrayList<Paziente>pazientiAllergici;
 
-    public Allergia(int id_Allergia, String principioAttivo, ArrayList<Paziente> pazientiallergici) {
+    public Allergia(int id_Allergia, String principioAttivo) {
         this.id_Allergia = id_Allergia;
         this.principioAttivo = principioAttivo;
-        this.pazientiallergici = pazientiallergici;
+        this.pazientiAllergici = new ArrayList<>();
     }
 
     public int getId_Allergia() {
@@ -29,6 +29,14 @@ public class Allergia {
         this.principioAttivo = principioAttivo;
     }
     public void addPaziente(Paziente p){
-        pazientiallergici.add(p);
+        pazientiAllergici.add(p);
+    }
+
+    public ArrayList<Paziente> getPazientiAllergici() {
+        return pazientiAllergici;
+    }
+
+    public void setPazientiAllergici(ArrayList<Paziente> pazientiAllergici) {
+        this.pazientiAllergici = pazientiAllergici;
     }
 }

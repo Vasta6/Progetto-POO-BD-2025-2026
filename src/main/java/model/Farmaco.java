@@ -1,17 +1,16 @@
-package Model;
+package model;
 
 public class Farmaco {
     private String codiceAIC, nomCommerciale, principioAttivo, obbligoRicetta;
     private double prezzo;
-    Paziente pazienteRichiedente;
 
-    public Farmaco(String codiceAIC, String nomCommerciale, String principioAttivo, String obbligoRicetta, double prezzo, Paziente pazienteRichiedente) {
+
+    public Farmaco(String codiceAIC, String nomCommerciale, String principioAttivo, String obbligoRicetta, double prezzo) {
         this.codiceAIC = codiceAIC;
         this.nomCommerciale = nomCommerciale;
         this.principioAttivo = principioAttivo;
         this.obbligoRicetta = obbligoRicetta;
         this.prezzo = prezzo;
-        this.pazienteRichiedente = pazienteRichiedente;
     }
 
     public String getCodiceAIC() {

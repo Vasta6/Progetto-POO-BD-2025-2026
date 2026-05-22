@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ public class Clinica {
     private String nome, indirizzo, città, numeroTelefonico;
     ArrayList<Reparto> reparti;
 
-    public Clinica(int idClinica, LocalDate dataCreazione, String nome, String indirizzo, String città, String numeroTelefonico, ArrayList<Reparto> reparti) {
+    public Clinica(int idClinica, LocalDate dataCreazione, String nome, String indirizzo, String città, String numeroTelefonico) {
         this.idClinica = idClinica;
         this.dataCreazione = dataCreazione;
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.città = città;
         this.numeroTelefonico = numeroTelefonico;
-        this.reparti = reparti;
+        this.reparti = new ArrayList<>();
     }
 
     public int getIdClinica() {

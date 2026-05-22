@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,17 +6,15 @@ import java.util.ArrayList;
 public class Medico extends Dipendente {
     private int idPrimario, oreSettimanaliAssegnate;
     private String numeroAlbo, specializzazione;
-    Reparto repartoAssegnato;
-    private ArrayList<Medico> primario;
+    private Medico primario;
 
 
-    public Medico(String nome, String cognome, String codiceFiscale, String matricola, LocalDate dataAssunzione, double stipendio, Reparto repartoDiAppartenenza, int idPrimario, int oreSettimanaliAssegnate, String numeroAlbo, String specializzazione, Reparto repartoAssegnato, ArrayList<Medico> primario) {
+    public Medico(String nome, String cognome, String codiceFiscale, String matricola, LocalDate dataAssunzione, double stipendio, Reparto repartoDiAppartenenza, int idPrimario, int oreSettimanaliAssegnate, String numeroAlbo, String specializzazione, Medico primario) {
         super(nome, cognome, codiceFiscale, matricola, dataAssunzione, stipendio, repartoDiAppartenenza);
         this.idPrimario = idPrimario;
         this.oreSettimanaliAssegnate = oreSettimanaliAssegnate;
         this.numeroAlbo = numeroAlbo;
         this.specializzazione = specializzazione;
-        this.repartoAssegnato = repartoAssegnato;
         this.primario = primario;
     }
 
@@ -52,4 +50,11 @@ public class Medico extends Dipendente {
         this.specializzazione = specializzazione;
     }
 
+    public Medico getPrimario() {
+        return primario;
+    }
+
+    public void setPrimario(Medico primario) {
+        this.primario = primario;
+    }
 }

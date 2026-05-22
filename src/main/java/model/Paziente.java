@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,14 +8,14 @@ public class Paziente {
     private LocalDate dataNascita;
     private ArrayList<Allergia> allergie;
 
-    public Paziente(String nome, String cognome, String codiceFiscale, String telefono, String email, LocalDate dataNascita, ArrayList<Allergia> allergie) {
+    public Paziente(String nome, String cognome, String codiceFiscale, String telefono, String email, LocalDate dataNascita) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
         this.telefono = telefono;
         this.email = email;
         this.dataNascita = dataNascita;
-        this.allergie = allergie;
+        this.allergie = new ArrayList<>();
     }
 
     public String getNome() {
@@ -69,4 +69,11 @@ public void addAllergia(Allergia a){
     allergie.add(a);
     }
 
+    public ArrayList<Allergia> getAllergie() {
+        return allergie;
+    }
+
+    public void setAllergie(ArrayList<Allergia> allergie) {
+        this.allergie = allergie;
+    }
 }
