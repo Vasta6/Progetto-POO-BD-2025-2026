@@ -5,13 +5,13 @@ import controller.Controller;
 import javax.swing.*;
 
 public class Home {
-    private JPanel mainPanel;
+    private JPanel LogIn;
     private static JFrame frameHome;
     private Controller controller;
 
     public static void main(String[] args) {
         frameHome = new JFrame("Home");
-        frameHome.setContentPane(new Home().mainPanel);
+        frameHome.setContentPane(new Home().LogIn);
         frameHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameHome.pack();
         frameHome.setVisible(true);

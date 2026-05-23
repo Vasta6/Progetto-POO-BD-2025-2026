@@ -12,12 +12,14 @@ public class Controller {
     private ArrayList<Clinica> listaCliniche;
     private ArrayList<Prenotazione> listaPrenotazioni;
     private ArrayList<Medico> listaMedici;
+    private ArrayList<Referto> listaReferti;
 
     public Controller() {
         this.listaPazienti = new ArrayList<>();
         this.listaCliniche = new ArrayList<>();
         this.listaPrenotazioni = new ArrayList<>();
         this.listaMedici = new ArrayList<>();
+        this.listaReferti = new ArrayList<>();
 
     }
 
@@ -25,24 +27,43 @@ public class Controller {
         return this.listaPazienti;
     }
 
-    public void registraNuovoPaziente(String nome, String cognome, String cf, String tel, String email, java.time.LocalDate nascita) {
-        Paziente p = new Paziente(nome, cognome, cf, tel, email, nascita);
-        listaPazienti.add(p);
-    }
-
     public ArrayList<Medico> getListaMedici() {
         return this.listaMedici;
-    }
-
-    public void registraNuovoMedico(Medico m) {
-        listaMedici.add(m);
     }
 
     public ArrayList<Prenotazione> getListaPrenotazioni() {
         return this.listaPrenotazioni;
     }
 
-    /*
+    public ArrayList<Referto> getListaReferti() {
+        return listaReferti;
+    }
+
+    public ArrayList<Clinica> getListaCliniche() {
+        return listaCliniche;
+    }
+
+    public void registraNuovoPaziente(Paziente p) {
+        listaPazienti.add(p);
+    }
+
+    public void registraNuovoMedico(Medico m) {
+        listaMedici.add(m);
+    }
+
+    public void registraNuovaPrenotazione(Prenotazione p) {
+        listaPrenotazioni.add(p);
+    }
+
+    public void aggiungiClinica(Clinica c) {
+        listaCliniche.add(c);
+    }
+
+    public void aggiungiNuovoReferto(Referto r) {
+        listaReferti.add(r);
+    }
+
+    /**
      * VINCOLO 1: Sicurezza del paziente - Blocco allergie
      * Controlla se il principio attivo del farmaco è tra le allergie del paziente;
      * Se è incompatibile blocca l'operazione immediatamente.   */
@@ -92,5 +113,7 @@ public class Controller {
     public boolean verificaTettoOreInfermiere(Infermiere infermiere, int oreNuovoTurno) {
         return (infermiere.getOreSettimanali() + oreNuovoTurno) <= 40;
     }
+
+
 
 }

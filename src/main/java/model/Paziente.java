@@ -65,7 +65,8 @@ public class Paziente {
     public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
-public void addAllergia(Allergia a){
+
+    public void addAllergia(Allergia a){
     allergie.add(a);
     }
 
