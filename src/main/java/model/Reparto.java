@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Reparto {
     private int idReparto, numeroStanze, piano;
     private String nomeReparto;
-    ArrayList<Dipendente>dipendenti;
+    Clinica clinicaDiAppartenenza;
 
-    public Reparto(int idReparto, int numeroStanze, int piano, String nomeReparto) {
+    public Reparto(int idReparto, int numeroStanze, int piano, String nomeReparto, Clinica clinicaDiAppartenenza) {
         this.idReparto = idReparto;
         this.numeroStanze = numeroStanze;
         this.piano = piano;
         this.nomeReparto = nomeReparto;
-        this.dipendenti = new ArrayList<>();
+        this.clinicaDiAppartenenza = clinicaDiAppartenenza;
     }
 
     public int getIdReparto() {
@@ -46,7 +46,12 @@ public class Reparto {
     public void setNomeReparto(String nomeReparto) {
         this.nomeReparto = nomeReparto;
     }
-    public void addDipendenti(Dipendente d){
-        dipendenti.add(d);
+
+    public Clinica getClinicaDiAppartenenza() {
+        return clinicaDiAppartenenza;
+    }
+
+    public void setClinicaDiAppartenenza(Clinica clinicaDiAppartenenza) {
+        this.clinicaDiAppartenenza = clinicaDiAppartenenza;
     }
 }

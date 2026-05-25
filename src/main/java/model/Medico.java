@@ -4,26 +4,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Medico extends Dipendente {
-    private int idPrimario, oreSettimanaliAssegnate;
+    private int oreSettimanaliAssegnate;
     private String numeroAlbo, specializzazione;
     private Medico primario;
+    private boolean isPrimario;
 
 
-    public Medico(String nome, String cognome, String codiceFiscale, String matricola, LocalDate dataAssunzione, double stipendio, Reparto repartoDiAppartenenza, int idPrimario, int oreSettimanaliAssegnate, String numeroAlbo, String specializzazione, Medico primario) {
+    public Medico(String nome, String cognome, String codiceFiscale, String matricola, LocalDate dataAssunzione, double stipendio, Reparto repartoDiAppartenenza, boolean isPrimario, int oreSettimanaliAssegnate, String numeroAlbo, String specializzazione, Medico primario) {
         super(nome, cognome, codiceFiscale, matricola, dataAssunzione, stipendio, repartoDiAppartenenza);
-        this.idPrimario = idPrimario;
+        this.isPrimario = isPrimario;
         this.oreSettimanaliAssegnate = oreSettimanaliAssegnate;
         this.numeroAlbo = numeroAlbo;
         this.specializzazione = specializzazione;
         this.primario = primario;
     }
 
-    public int getIdPrimario() {
-        return idPrimario;
+    public boolean getIdPrimario() {
+        return isPrimario;
     }
 
-    public void setIdPrimario(int idPrimario) {
-        this.idPrimario = idPrimario;
+    public void setIdPrimario(boolean isPrimario) {
+        this.isPrimario = isPrimario;
     }
 
     public int getOreSettimanaliAssegnate() {
