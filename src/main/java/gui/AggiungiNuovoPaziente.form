@@ -144,12 +144,16 @@
           <text value="Inserisci i tuoi dati"/>
         </properties>
       </component>
-      <component id="abd5a" class="javax.swing.JLabel" binding="Nota">
+      <component id="d9946" class="javax.swing.JTextArea" binding="Nota">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
         </constraints>
         <properties>
-          <text value="Usare ctrl per &#10;selezionare piu allergie"/>
+          <editable value="false"/>
+          <lineWrap value="true"/>
+          <text value="Usare ctrl per &#10;selezionare&#10;più allergie "/>
         </properties>
       </component>
     </children>

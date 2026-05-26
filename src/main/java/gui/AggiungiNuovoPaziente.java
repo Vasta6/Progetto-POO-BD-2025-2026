@@ -30,7 +30,7 @@ public class AggiungiNuovoPaziente extends JFrame {
     private JButton btnRegistrazioneCompleta;
     private JList listaAllergie;
     private JScrollPane scorrimentoAllergie;
-    private JLabel Nota;
+    private JTextArea Nota;
 
     public AggiungiNuovoPaziente(Controller controller) {
         // 1. Setup iniziale della finestra (va bene lasciarlo in alto)
