@@ -175,7 +175,7 @@ public class Controller {
 
 
 
-    /**
+    /*
      * VINCOLO 1: Sicurezza del paziente - Blocco allergie
      * Controlla se il principio attivo del farmaco è tra le allergie del paziente;
      * Se è incompatibile blocca l'operazione immediatamente.   */
@@ -192,7 +192,7 @@ public class Controller {
         return true;
     }
 
-    /**
+    /*
      * VINCOLO 2: Conflitti di schedulazione - Sovrapposizione Orari
      * Verifica che il medico non abbia altre visite che si sovrappongono nell'intervallo richiesto. */
     public boolean isMedicoDisponibile(Medico medico, LocalDateTime inizioRichiesto, LocalDateTime fineRichiesto) {
@@ -209,7 +209,7 @@ public class Controller {
         return true; // Medico libero
     }
 
-    /**
+    /*
      * VINCOLO 3: Sforamento Monte Ore Settimanale
      * Impedisce l'assegnazione se porta un medico o un infermiere a superare le 40 ore complessive.
      */
