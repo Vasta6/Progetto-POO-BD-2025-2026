@@ -12,6 +12,7 @@ public class MedicoPanel extends JFrame {
     private JButton btnVisApp;
     private JButton btnREF;
     private JPanel medicoPanel;
+    private JLabel TitMed;
 
     public MedicoPanel(Controller controller) {
         setVisible(true);

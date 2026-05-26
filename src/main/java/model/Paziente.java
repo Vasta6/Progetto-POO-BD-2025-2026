@@ -9,14 +9,14 @@ public class Paziente {
     private ArrayList<Allergia> allergie;
     private ArrayList<Referto> cartellaClinica;
 
-    public Paziente(String nome, String cognome, String codiceFiscale, String telefono, String email, LocalDate dataNascita) {
+    public Paziente(String nome, String cognome, String codiceFiscale, String telefono, String email, LocalDate dataNascita,ArrayList<Allergia> allergie) {
         this.nome = nome;
         this.cognome = cognome;
         this.codiceFiscale = codiceFiscale;
         this.telefono = telefono;
         this.email = email;
         this.dataNascita = dataNascita;
-        this.allergie = new ArrayList<>();
+        this.allergie = allergie;
         this.cartellaClinica = new ArrayList<>();
     }
 

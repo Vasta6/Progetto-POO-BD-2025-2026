@@ -14,6 +14,7 @@ public class Home extends  JFrame {
     private JLabel login;
     private JLabel password;
     private JButton btnREG;
+    private JLabel Titolo;
     private static JFrame frameHome;
     private Controller controller;
 
@@ -24,7 +25,7 @@ public class Home extends  JFrame {
 
         setContentPane(LogInGUI);
         setTitle("Login - Clinica");
-        setSize(400,300);
+        setSize(550,350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         // Add action listeners or other initialization code here

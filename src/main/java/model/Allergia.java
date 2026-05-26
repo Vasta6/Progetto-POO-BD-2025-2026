@@ -39,4 +39,9 @@ public class Allergia {
     public void setPazientiAllergici(ArrayList<Paziente> pazientiAllergici) {
         this.pazientiAllergici = pazientiAllergici;
     }
+    @Override
+    public String toString() {
+        return this.principioAttivo;
+    }
 }
+

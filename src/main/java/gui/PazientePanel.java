@@ -10,6 +10,7 @@ public class PazientePanel extends JFrame {
     private JPanel pazientePanel;
     private JButton btnCartClin;
     private JButton btnPREN;
+    private JLabel Titolopaz;
 
     public PazientePanel(Controller controller){
 

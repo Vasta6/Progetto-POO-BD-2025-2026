@@ -180,15 +180,22 @@ public class Controller {
      * Controlla se il principio attivo del farmaco è tra le allergie del paziente;
      * Se è incompatibile blocca l'operazione immediatamente.   */
 
-    public boolean emettiPrescrizioneSicura(Paziente paziente, Referto referto, Farmaco farmaco, int idPrescr, int durata, String dosaggio) {
-        for (Allergia a : paziente.getAllergie()) {
-            if (a.getPrincipioAttivo().equalsIgnoreCase(farmaco.getPrincipioAttivo())) {
+    public boolean emettiPrescrizioneSicura(Paziente paziente, Referto referto, Farmaco farmaco, int idPrescrizione, int durata, String dosaggio) {
+
+        // Scorriamo gli oggetti Allergia associati a questo specifico paziente
+        for (Allergia allergia : paziente.getAllergie()) {
+
+            // Confrontiamo il principio attivo dell'allergia con il principio attivo del farmaco
+            if (allergia.getPrincipioAttivo().equalsIgnoreCase(farmaco.getPrincipioAttivo())) {
+                // Se sono uguali c'è una corrispondenza pericolosa: blocchiamo l'emissione!
                 return false;
             }
         }
-        // Se non è allergico, crea la prescrizione e la aggancia al referto
-        Prescrizione nuova = new Prescrizione(idPrescr, durata, dosaggio, referto, farmaco);
-        referto.aggiungiPrescrizione(nuova);
+
+        // Se il ciclo termina senza blocchi, il farmaco non è pericoloso per il paziente
+        Prescrizione nuovaPrescrizione = new Prescrizione(idPrescrizione, durata, dosaggio,null, farmaco);
+        referto.getPrescrizioni().add(nuovaPrescrizione);
+
         return true;
     }
 
@@ -225,4 +232,5 @@ public class Controller {
     public boolean verificaTettoOreInfermiere(Infermiere infermiere, int oreNuovoTurno) {
         return (infermiere.getOreSettimanali() + oreNuovoTurno) <= 40;
     }
+
 }
