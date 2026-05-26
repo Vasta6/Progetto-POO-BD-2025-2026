@@ -3,7 +3,6 @@ package gui;
 import controller.Controller;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +13,7 @@ public class Home extends  JFrame {
     private JTextField loginText;
     private JLabel login;
     private JLabel password;
+    private JButton btnREG;
     private static JFrame frameHome;
     private Controller controller;
 
@@ -58,5 +58,12 @@ public class Home extends  JFrame {
             }
         });
 
+        btnREG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AggiungiNuovoPaziente registrazionePaziente = new AggiungiNuovoPaziente(controller);
+                registrazionePaziente.setVisible(true);
+                dispose();
+            }
+        });
     }
 }

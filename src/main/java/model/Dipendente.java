@@ -73,4 +73,9 @@ public class Dipendente {
     public void setStipendio(double stipendio) {
         this.stipendio = stipendio;
     }
+
+    @Override
+    public String toString() {
+        return nome + " " + cognome;
+    }
 }

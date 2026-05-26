@@ -21,6 +21,7 @@ public class Controller {
         this.listaPrenotazioni = new ArrayList<>();
         this.listaMedici = new ArrayList<>();
         this.listaReferti = new ArrayList<>();
+        this.listaReparti = new ArrayList<>();
 
         //CLINICHE
         Clinica sanGennaro = new Clinica(01,java.time.LocalDate.of(1980,6,15),"Clinica San Gennaro","Via San Gennaro dei Poveri","Napoli","081 7733 456");
@@ -131,6 +132,9 @@ public class Controller {
                 4000.00, radiologia,false,40,"2077","Radiologia Interventistica", hamilton);
         this.listaMedici.add(schumacher);
     }
+    public void registraReferto(Referto r, Paziente p) {
+        p.aggiungiReferto(r);
+    }
 
     public ArrayList<Paziente> getListaPazienti() {
         return this.listaPazienti;
@@ -151,26 +155,25 @@ public class Controller {
     public ArrayList<Clinica> getListaCliniche() {
         return listaCliniche;
     }
+    public ArrayList<Reparto> getListaReparto() {
+        return listaReparti;
+    }
 
     public void registraNuovoPaziente(Paziente p) {
         listaPazienti.add(p);
     }
 
-    public void registraNuovoMedico(Medico m) {
-        listaMedici.add(m);
-    }
 
     public void registraNuovaPrenotazione(Prenotazione p) {
         listaPrenotazioni.add(p);
     }
 
-    public void aggiungiClinica(Clinica c) {
-        listaCliniche.add(c);
-    }
 
     public void aggiungiNuovoReferto(Referto r) {
         listaReferti.add(r);
     }
+
+
 
     /**
      * VINCOLO 1: Sicurezza del paziente - Blocco allergie
@@ -222,6 +225,4 @@ public class Controller {
     public boolean verificaTettoOreInfermiere(Infermiere infermiere, int oreNuovoTurno) {
         return (infermiere.getOreSettimanali() + oreNuovoTurno) <= 40;
     }
-
-
 }

@@ -69,4 +69,9 @@ public class Clinica {
     public void addreparti(Reparto r){
         reparti.add(r);
     }
+
+    @Override
+    public String toString() {
+        return nome +  " - " + indirizzo + " - " + città + " - " + numeroTelefonico;
+    }
 }

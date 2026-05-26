@@ -54,4 +54,9 @@ public class Reparto {
     public void setClinicaDiAppartenenza(Clinica clinicaDiAppartenenza) {
         this.clinicaDiAppartenenza = clinicaDiAppartenenza;
     }
+
+    @Override
+    public String toString() {
+        return nomeReparto + " - " + piano;
+    }
 }

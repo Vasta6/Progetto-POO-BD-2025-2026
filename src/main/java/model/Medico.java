@@ -58,4 +58,9 @@ public class Medico extends Dipendente {
     public void setPrimario(Medico primario) {
         this.primario = primario;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " - " + specializzazione;
+    }
 }

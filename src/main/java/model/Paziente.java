@@ -7,6 +7,7 @@ public class Paziente {
     private String nome,cognome,codiceFiscale,telefono,email;
     private LocalDate dataNascita;
     private ArrayList<Allergia> allergie;
+    private ArrayList<Referto> cartellaClinica;
 
     public Paziente(String nome, String cognome, String codiceFiscale, String telefono, String email, LocalDate dataNascita) {
         this.nome = nome;
@@ -16,6 +17,7 @@ public class Paziente {
         this.email = email;
         this.dataNascita = dataNascita;
         this.allergie = new ArrayList<>();
+        this.cartellaClinica = new ArrayList<>();
     }
 
     public String getNome() {
@@ -66,15 +68,23 @@ public class Paziente {
         this.dataNascita = dataNascita;
     }
 
-    public void addAllergia(Allergia a){
-    allergie.add(a);
-    }
-
     public ArrayList<Allergia> getAllergie() {
         return allergie;
     }
 
     public void setAllergie(ArrayList<Allergia> allergie) {
         this.allergie = allergie;
+    }
+
+    public void setCartellaClinica(ArrayList<Referto> cartellaClinica) {
+        this.cartellaClinica = cartellaClinica;
+    }
+
+    public void aggiungiReferto(Referto r) {
+        this.cartellaClinica.add(r);
+    }
+
+    public ArrayList<Referto> getCartellaClinica() {
+        return cartellaClinica;
     }
 }
