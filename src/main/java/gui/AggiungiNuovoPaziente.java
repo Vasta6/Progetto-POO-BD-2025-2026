@@ -30,11 +30,12 @@ public class AggiungiNuovoPaziente extends JFrame {
     private JButton btnRegistrazioneCompleta;
     private JList listaAllergie;
     private JScrollPane scorrimentoAllergie;
+    private JLabel Nota;
 
     public AggiungiNuovoPaziente(Controller controller) {
         // 1. Setup iniziale della finestra (va bene lasciarlo in alto)
         setContentPane(registrazionePaziente);
-        setTitle("Area Personale");
+        setTitle("Registrazione Paziente ");
         setSize(550, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

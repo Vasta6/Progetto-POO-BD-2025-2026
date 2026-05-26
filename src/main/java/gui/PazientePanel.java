@@ -16,7 +16,7 @@ public class PazientePanel extends JFrame {
 
         setVisible(true);
         setContentPane(pazientePanel);
-        setTitle("Area Personale");
+        setTitle("Area Personale - Paziente");
         setSize(400,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

@@ -17,7 +17,7 @@ public class MedicoPanel extends JFrame {
     public MedicoPanel(Controller controller) {
         setVisible(true);
         setContentPane(medicoPanel);
-        setTitle("Area Personale");
+        setTitle("Area Personale - Medico");
         setSize(400,300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
