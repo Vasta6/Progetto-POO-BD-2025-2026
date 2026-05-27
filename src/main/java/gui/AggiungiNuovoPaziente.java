@@ -64,14 +64,14 @@ public class AggiungiNuovoPaziente extends JFrame {
                 String postaELETTR = mail.getText().trim();
                 String dataStringa = dataDiNascita.getText().trim();
 
-                // Controllo campi vuoti per evitare crash
+                // Controllo campi vuoti
                 if (nome.isEmpty() || cognome.isEmpty() || codiceFISCALE.isEmpty() || dataStringa.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Tutti i campi principali sono obbligatori!", "Errore", JOptionPane.WARNING_MESSAGE);
                     return; // Ferma l'esecuzione se manca qualcosa
                 }
                 java.util.List<Allergia> allergieSelezionate = listaAllergie.getSelectedValuesList();
                 ArrayList<Allergia> allergiePaziente = new ArrayList<>(allergieSelezionate);
-                // IL TRY-CATCH PER PROTEGGERE LA DATA DI NASCITA
+                //Il try-catch per proteggere la data di nascita
                 try {
                     // Converte il testo in LocalDate (formato richiesto: AAAA-MM-GG)
                     LocalDate dataNascita = LocalDate.parse(dataStringa);
@@ -81,13 +81,13 @@ public class AggiungiNuovoPaziente extends JFrame {
 
                     JOptionPane.showMessageDialog(null, "Paziente registrato con successo!");
 
-                    // Torniamo alla Home di Login e chiudiamo questo pannello
+                    // Torniamo alla Home chiudiamo il pannello
                     Home logInGUI = new Home(controller);
                     logInGUI.setVisible(true);
                     dispose();
 
                 } catch (DateTimeParseException ex) {
-                    // Se la data è vuota o scritta male, mostriamo l'errore senza crashare
+                    // Se la data è vuota o scritta male, mostriamo l'errore
                     JOptionPane.showMessageDialog(null, "Formato data non valido! Usa: ANNO-MESE-GIORNO (Es: 1998-12-20)", "Errore Data", JOptionPane.ERROR_MESSAGE);
                 }
             }

@@ -28,7 +28,7 @@ public class Home extends  JFrame {
         setSize(550,350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        // Add action listeners or other initialization code here
+
         btnAccedi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String login = loginText.getText();

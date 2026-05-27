@@ -35,9 +35,9 @@ public class AggiungiPrescrizionePanel extends JFrame {
         inizializzaFinestra();
     }
 
-    /**
-     * Metodo di supporto per evitare di duplicare lo stesso codice grafico
-     * e la logica del bottone in entrambi i costruttori.
+    /*
+      Metodo per evitare di duplicare lo stesso codice grafico
+      e la logica del bottone in entrambi i costruttori.
      */
     private void inizializzaFinestra() {
         setContentPane(aggiuntaPrescr);

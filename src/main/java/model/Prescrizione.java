@@ -3,7 +3,6 @@ package model;
 public class Prescrizione {
     private int durataTerapiaGiorni;
     private String dosaggioGiornaliero;
-    // ASSOCIAZIONI
     Referto refertoVisita;
     Farmaco farmacoPrescritto;
 

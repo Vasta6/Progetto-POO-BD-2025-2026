@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 
 public class Controller {
-    // "Database" temporaneo in memoria centralizzato
     private ArrayList<Paziente> listaPazienti;
     private ArrayList<Clinica> listaCliniche;
     private ArrayList<Prenotazione> listaPrenotazioni;
@@ -134,6 +133,8 @@ public class Controller {
                 4000.00, radiologia,false,40,"2077","Radiologia Interventistica", hamilton);
         this.listaMedici.add(schumacher);
 
+        //FARMACI
+
         Farmaco tachipirina = new Farmaco("001","Tachipirina", "Paracetamolo", false,5.00);
         Farmaco augmentin = new Farmaco("002","Augmentin", "Amoxicillina", true,9.00);
         Farmaco brufen = new Farmaco("003","Brufen", "Ibuprofene", false,6.00);
@@ -196,29 +197,20 @@ public class Controller {
     }
 
     /*
-     * VINCOLO 1: Sicurezza del paziente - Blocco allergie
-     * Controlla se il principio attivo del farmaco è tra le allergie del paziente;
-     * Se è incompatibile blocca l'operazione immediatamente.   */
+      VINCOLO 1: Sicurezza del paziente - Blocco allergie
+      Controlla se il paziente è allergico ai farmaci inseriti nel referto.
+      paziente Il paziente selezionato
+      referto Il referto corrente contenente le prescrizioni
+      @return true se viene trovata un'allergia pericolosa, false altrimenti
+     */
 
-    /**
-     * Controlla se il paziente è allergico ai farmaci inseriti nel referto.
-     * @param paziente Il paziente selezionato
-     * @param referto Il referto corrente contenente le prescrizioni
-     * @return true se viene trovata un'allergia pericolosa, false altrimenti
-     */
-    /**
-     * Controlla se il paziente è allergico ai farmaci inseriti nel referto.
-     * @param paziente Il paziente selezionato
-     * @param referto Il referto corrente contenente le prescrizioni
-     * @return true se viene trovata un'allergia pericolosa, false altrimenti
-     */
     public boolean erogaPrescrizioneSicura(Paziente paziente, Referto referto) {
-        // Se il referto o la lista delle prescrizioni all'interno sono vuoti, non c'è rischio
+        // Se il referto o la lista delle prescrizioni all'interno sono vuoti
         if (referto == null || referto.getPrescrizioni() == null) {
             return false;
         }
 
-        // Se il paziente non ha allergie registrate, la prescrizione è sicura
+        // Se il paziente non ha allergie registrate
         if (paziente == null || paziente.getAllergie() == null) {
             return false;
         }
@@ -228,41 +220,37 @@ public class Controller {
             Farmaco farmaco = p.getFarmacoPrescritto();
 
             if (farmaco != null && farmaco.getPrincipioAttivo() != null) {
-                // Puliamo la stringa del principio attivo del farmaco
+
                 String principioAttivo = farmaco.getPrincipioAttivo().toLowerCase().trim();
 
-                // Cicliamo usando la tua classe specifica: Allergia
+
                 for (Allergia allergia : paziente.getAllergie()) {
                     if (allergia != null) {
-                        // Usiamo toString() per estrarre il testo dell'allergia in modo sicuro
                         String allergiaClean = allergia.toString().toLowerCase().trim();
-
-                        // Se la tua classe Allergia ha un metodo come getNome(), puoi usarlo sostituendo la riga sopra con:
-                        // String allergiaClean = allergia.getNome().toLowerCase().trim();
-
-                        // Controllo incrociato per evitare problemi di battitura o spazi
                         if (allergiaClean.contains(principioAttivo) || principioAttivo.contains(allergiaClean)) {
-                            return true; // PERICOLO: Il paziente è allergico a questo farmaco!
+                            return true; //Il paziente è allergico a questo farmaco!
                         }
                     }
                 }
             }
         }
 
-        return false; // Tutto sicuro, nessuna allergia riscontrata
+        return false; //Nessuna allergia riscontrata
     }
 
     /*
-     * VINCOLO 2: Conflitti di schedulazione - Sovrapposizione Orari
-     * Verifica che il medico non abbia altre visite che si sovrappongono nell'intervallo richiesto. */
+     VINCOLO 2: Conflitti di schedulazione - Sovrapposizione Orari
+     Verifica che il medico non abbia altre visite che si sovrappongono nell'intervallo richiesto.
+     */
     public boolean isMedicoDisponibile(Medico medico, LocalDateTime inizioRichiesto, LocalDateTime fineRichiesto) {
         for (Prenotazione p : listaPrenotazioni) {
 
             // Se la prenotazione appartiene al medico che stiamo controllando
             if (p.getMedicoRichiesto().getMatricola().equals(medico.getMatricola())) {
-                // Algoritmo di controllo sovrapposizione temporale tra due intervalli
+
+                // Algoritmo di controllo tra i due intervalli
                 if (inizioRichiesto.isBefore(p.getDataOraFine()) && fineRichiesto.isAfter(p.getDataOraInizio())) {
-                    return false; // C'è una sovrapposizione di orario!
+                    return false;//Orario sovrapposto
                 }
             }
         }
@@ -270,8 +258,8 @@ public class Controller {
     }
 
     /*
-     * VINCOLO 3: Sforamento Monte Ore Settimanale
-     * Impedisce l'assegnazione se porta un medico o un infermiere a superare le 40 ore complessive.
+     VINCOLO 3: Sforamento Monte Ore Settimanale
+     Impedisce l'assegnazione se porta un medico o un infermiere a superare le 40 ore complessive.
      */
     public boolean verificaTettoOreMedico(Medico medico, int oreNuovaVisita_Turno) {
          int oreTotali= medico.getOreSettimanaliAssegnate()+ oreNuovaVisita_Turno;
@@ -281,7 +269,7 @@ public class Controller {
              return false;
          }
     }
-
+   //Metodo diretto con il return
     public boolean verificaTettoOreInfermiere(Infermiere infermiere, int oreNuovoTurno) {
         return (infermiere.getOreSettimanali() + oreNuovoTurno) <= 40;
     }
