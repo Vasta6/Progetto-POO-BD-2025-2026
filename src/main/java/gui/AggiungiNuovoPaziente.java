@@ -33,14 +33,11 @@ public class AggiungiNuovoPaziente extends JFrame {
     private JTextArea Nota;
 
     public AggiungiNuovoPaziente(Controller controller) {
-        // 1. Setup iniziale della finestra (va bene lasciarlo in alto)
         setContentPane(registrazionePaziente);
         setTitle("Registrazione Paziente ");
-        setSize(550, 350);
+        setSize(400, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        // Rendi visibile il frame solo DOPO aver configurato i componenti
         setVisible(true);
 
         Allergia[] elencoAllergie = {
@@ -52,21 +49,14 @@ public class AggiungiNuovoPaziente extends JFrame {
 
         };
 
-        // 2. Passiamo l'array alla JList
         listaAllergie.setListData(elencoAllergie);
 
-        // 3. ABILITIAMO LA SELEZIONE MULTIPLA
         listaAllergie.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        // 2. AZIONE DEL BOTTONE: Tutto accade quando l'utente clicca!
         btnRegistrazioneCompleta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-
-
-                // LEGGIAMO I DATI SOLO ORA CHE IL BOTTONE È STATO PREMUTO
                 String nome = nomePaziente.getText().trim();
                 String cognome = cognomePaziente.getText().trim();
                 String codiceFISCALE = codiceFiscale.getText().trim();
@@ -97,7 +87,7 @@ public class AggiungiNuovoPaziente extends JFrame {
                     dispose();
 
                 } catch (DateTimeParseException ex) {
-                    // Se la data è vuota o scritta male (es. con i /), mostriamo l'errore senza crashare
+                    // Se la data è vuota o scritta male, mostriamo l'errore senza crashare
                     JOptionPane.showMessageDialog(null, "Formato data non valido! Usa: ANNO-MESE-GIORNO (Es: 1998-12-20)", "Errore Data", JOptionPane.ERROR_MESSAGE);
                 }
             }

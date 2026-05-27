@@ -67,6 +67,7 @@ public class Referto {
     public void setPrescrizioni(ArrayList<Prescrizione> prescrizioni) {
         this.prescrizioni = prescrizioni;
     }
+
     public void aggiungiPrescrizione (Prescrizione p) {
         this.prescrizioni.add(p);
     }

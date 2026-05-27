@@ -1,26 +1,17 @@
 package model;
 
 public class Prescrizione {
-    private int idPrescrizione, durataTerapiaGiorni;
+    private int durataTerapiaGiorni;
     private String dosaggioGiornaliero;
     // ASSOCIAZIONI
     Referto refertoVisita;
     Farmaco farmacoPrescritto;
 
-    public Prescrizione(int idPrescrizione, int durataTerapiaGiorni, String dosaggioGiornaliero, Referto refertoVisita, Farmaco farmacoPrescritto) {
-        this.idPrescrizione = idPrescrizione;
+    public Prescrizione(int durataTerapiaGiorni, String dosaggioGiornaliero, Referto refertoVisita, Farmaco farmacoPrescritto) {
         this.durataTerapiaGiorni = durataTerapiaGiorni;
         this.dosaggioGiornaliero = dosaggioGiornaliero;
         this.refertoVisita = refertoVisita;
         this.farmacoPrescritto = farmacoPrescritto;
-    }
-
-    public int getIdPrescrizione() {
-        return idPrescrizione;
-    }
-
-    public void setIdPrescrizione(int idPrescrizione) {
-        this.idPrescrizione = idPrescrizione;
     }
 
     public int getDurataTerapiaGiorni() {

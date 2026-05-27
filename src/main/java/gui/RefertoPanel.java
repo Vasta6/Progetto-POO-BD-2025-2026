@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class RefertoPanel extends JFrame {
     private JPanel erogaReferto;
@@ -18,68 +16,91 @@ public class RefertoPanel extends JFrame {
     private JTextArea diagnosi;
     private JTextArea noteAggiuntive;
     private JButton erogazioneREF;
+    private JComboBox selezionePaziente;
+    private JLabel sintomiLabel;
+    private JLabel diagnosiLabel;
+    private JLabel prescrizioneLabel;
+    private JLabel noteLabel;
+    private JButton btnAggPrescr;
+    private Paziente pazienteDestinatario;
+    private Controller controller;
+    private Referto refertoCorrente;
 
 
-    /* public RefertoPanel(Controller controller) {
-
-         setVisible(true);
-         setContentPane(erogaReferto);
-         setTitle("Compila il Referto");
-         setSize(400,300);
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         setLocationRelativeTo(null);
-
-
-         erogazioneREF.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 int idIntero = Integer.parseInt(idReferto.getText());
-                 LocalDate dataReferto = LocalDate.now();
-                 String sintomi = sintomiDichiarati.getText();
-                 String diagnosis = diagnosi.getText();
-                 String note = noteAggiuntive.getText();
-                 controller.aggiungiNuovoReferto(new Referto(idIntero, dataReferto, sintomi, diagnosis, note,null, null));
-             }
-         });
-     }
- }*/
     public RefertoPanel(Controller controller) {
+        this.controller = controller;
+        this.refertoCorrente = new Referto(0, LocalDate.now(), "", "", "", null, null);;
 
-        // 1. Setup della finestra
         setContentPane(erogaReferto);
         setTitle("Compila il Referto");
-        setSize(400, 450); // Ti consiglio di alzarlo un po' per far entrare bene i 3 box di testo
+        setSize(400, 450);
         setLocationRelativeTo(null);
-
-        // ⚠️ ATTENZIONE: Se usi EXIT_ON_CLOSE, chiudendo questo referto si chiuderà TUTTA l'applicazione!
-        // Usa DISPOSE_ON_CLOSE così si chiude solo questa finestrella e il medico torna alla schermata principale.
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // 🛑 ECCO IL CODICE MAGICO PER LA DATA AUTOMATICA
         dataCompilazione.setText(LocalDate.now().toString());
 
-        // Ti consiglio anche di bloccarla, così il medico non può cancellarla o scriverla in formati strani
         dataCompilazione.setEditable(false);
 
-        // Azione del bottone
+        //CONTROLLO E AGGIUNT DELLA LISTA DEI PAZIENTI REGISTRATI NELLA COMBOBOX
+        if(controller.getListaPazienti().isEmpty()){
+            selezionePaziente.addItem("Nessun paziente registrato");
+        } else {
+            for (Paziente p : controller.getListaPazienti()) {
+                selezionePaziente.addItem(p.getNome() + " " + p.getCognome() + " " + p.getCodiceFiscale());
+            }
+        }
+
         erogazioneREF.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int idIntero = Integer.parseInt(idReferto.getText());
-                LocalDate dataReferto = LocalDate.now();
-                String sintomi = sintomiDichiarati.getText();
-                String diagnosis = diagnosi.getText();
-                String note = noteAggiuntive.getText();
 
-                // Qui andrai a passargli anche il paziente come discusso prima ;)
-                controller.aggiungiNuovoReferto(new Referto(idIntero, dataReferto, sintomi, diagnosis, note, null, null));
+                if (idReferto.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,"INSERIRE ID DEL REFERTO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                JOptionPane.showMessageDialog(null, "Referto salvato!");
-                dispose(); // Chiude la finestra del referto dopo aver salvato
+                int idSelezionato = selezionePaziente.getSelectedIndex();
+                Paziente pazienteSelezionato = controller.getListaPazienti().get(idSelezionato);
+
+
+                boolean haAllergia = controller.erogaPrescrizioneSicura(pazienteSelezionato, refertoCorrente);
+
+                if (haAllergia) {
+                    JOptionPane.showMessageDialog(RefertoPanel.this, "IMPOSSIBILE ERORAGARE IL REFERTO.\n" +
+                            "Il paziente selezionato è allergico al farmaco prescritto", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+
+                try {
+                    refertoCorrente.setIdReferto(Integer.parseInt(idReferto.getText()));
+                    refertoCorrente.setDataCompilazione(LocalDate.now());
+                    refertoCorrente.setSintomiDichiarati(sintomiDichiarati.getText());
+                    refertoCorrente.setDiagnosi(diagnosi.getText());
+                    refertoCorrente.setNoteAggiuntive(noteAggiuntive.getText());
+
+                    pazienteSelezionato.getCartellaClinica().add(refertoCorrente);
+                    controller.aggiungiNuovoReferto(refertoCorrente);
+
+                    JOptionPane.showMessageDialog(null, "Referto erogato e salvato!");
+                    dispose();
+                } catch (NumberFormatException erro) {
+                    JOptionPane.showMessageDialog(null, "INSERIRE UN ID IN FORMATO VALIDO (es: 1)",
+                            "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
-        // 2. Rendi visibile la finestra SOLO alla fine, dopo aver caricato la data
         setVisible(true);
+
+        btnAggPrescr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AggiungiPrescrizionePanel aggiuntaPrescr = new AggiungiPrescrizionePanel(controller,refertoCorrente);
+                aggiuntaPrescr.setVisible(true);
+            }
+        });
     }
+
+
 }

@@ -14,6 +14,7 @@ public class Controller {
     private ArrayList<Medico> listaMedici;
     private ArrayList<Referto> listaReferti;
     private ArrayList<Reparto> listaReparti;
+    private ArrayList<Farmaco> listaFarmaci;
 
     public Controller() {
         this.listaPazienti = new ArrayList<>();
@@ -22,6 +23,7 @@ public class Controller {
         this.listaMedici = new ArrayList<>();
         this.listaReferti = new ArrayList<>();
         this.listaReparti = new ArrayList<>();
+        this.listaFarmaci = new ArrayList<>();
 
         //CLINICHE
         Clinica sanGennaro = new Clinica(01,java.time.LocalDate.of(1980,6,15),"Clinica San Gennaro","Via San Gennaro dei Poveri","Napoli","081 7733 456");
@@ -131,9 +133,25 @@ public class Controller {
         Medico schumacher = new Medico("Michael", "Schumacher", "SCHMCH69M03Z112W", "M077", java.time.LocalDate.of(2018,4,30),
                 4000.00, radiologia,false,40,"2077","Radiologia Interventistica", hamilton);
         this.listaMedici.add(schumacher);
+
+        Farmaco tachipirina = new Farmaco("001","Tachipirina", "Paracetamolo", false,5.00);
+        Farmaco augmentin = new Farmaco("002","Augmentin", "Amoxicillina", true,9.00);
+        Farmaco brufen = new Farmaco("003","Brufen", "Ibuprofene", false,6.00);
+        Farmaco bentelan = new Farmaco("004","Bentelan", "Betametasone", true,3.50);
+        Farmaco bactrim = new Farmaco("005","Bactrim", "Sulfametoxazolo", true,4.00);
+
+        listaFarmaci.add(tachipirina);
+        listaFarmaci.add(augmentin);
+        listaFarmaci.add(brufen);
+        listaFarmaci.add(bentelan);
+        listaFarmaci.add(bactrim);
     }
     public void registraReferto(Referto r, Paziente p) {
         p.aggiungiReferto(r);
+    }
+
+    public void aggiungiPrescrizione(Referto r, Prescrizione prescr) {
+        r.aggiungiPrescrizione(prescr);
     }
 
     public ArrayList<Paziente> getListaPazienti() {
@@ -155,48 +173,83 @@ public class Controller {
     public ArrayList<Clinica> getListaCliniche() {
         return listaCliniche;
     }
+
     public ArrayList<Reparto> getListaReparto() {
         return listaReparti;
     }
+
+    public ArrayList<Farmaco> getListaFarmaci() {
+        return listaFarmaci;
+    }
+
 
     public void registraNuovoPaziente(Paziente p) {
         listaPazienti.add(p);
     }
 
-
     public void registraNuovaPrenotazione(Prenotazione p) {
         listaPrenotazioni.add(p);
     }
 
-
     public void aggiungiNuovoReferto(Referto r) {
         listaReferti.add(r);
     }
-
-
 
     /*
      * VINCOLO 1: Sicurezza del paziente - Blocco allergie
      * Controlla se il principio attivo del farmaco è tra le allergie del paziente;
      * Se è incompatibile blocca l'operazione immediatamente.   */
 
-    public boolean emettiPrescrizioneSicura(Paziente paziente, Referto referto, Farmaco farmaco, int idPrescrizione, int durata, String dosaggio) {
+    /**
+     * Controlla se il paziente è allergico ai farmaci inseriti nel referto.
+     * @param paziente Il paziente selezionato
+     * @param referto Il referto corrente contenente le prescrizioni
+     * @return true se viene trovata un'allergia pericolosa, false altrimenti
+     */
+    /**
+     * Controlla se il paziente è allergico ai farmaci inseriti nel referto.
+     * @param paziente Il paziente selezionato
+     * @param referto Il referto corrente contenente le prescrizioni
+     * @return true se viene trovata un'allergia pericolosa, false altrimenti
+     */
+    public boolean erogaPrescrizioneSicura(Paziente paziente, Referto referto) {
+        // Se il referto o la lista delle prescrizioni all'interno sono vuoti, non c'è rischio
+        if (referto == null || referto.getPrescrizioni() == null) {
+            return false;
+        }
 
-        // Scorriamo gli oggetti Allergia associati a questo specifico paziente
-        for (Allergia allergia : paziente.getAllergie()) {
+        // Se il paziente non ha allergie registrate, la prescrizione è sicura
+        if (paziente == null || paziente.getAllergie() == null) {
+            return false;
+        }
 
-            // Confrontiamo il principio attivo dell'allergia con il principio attivo del farmaco
-            if (allergia.getPrincipioAttivo().equalsIgnoreCase(farmaco.getPrincipioAttivo())) {
-                // Se sono uguali c'è una corrispondenza pericolosa: blocchiamo l'emissione!
-                return false;
+        // Analizziamo ogni singola prescrizione aggiunta al referto
+        for (Prescrizione p : referto.getPrescrizioni()) {
+            Farmaco farmaco = p.getFarmacoPrescritto();
+
+            if (farmaco != null && farmaco.getPrincipioAttivo() != null) {
+                // Puliamo la stringa del principio attivo del farmaco
+                String principioAttivo = farmaco.getPrincipioAttivo().toLowerCase().trim();
+
+                // Cicliamo usando la tua classe specifica: Allergia
+                for (Allergia allergia : paziente.getAllergie()) {
+                    if (allergia != null) {
+                        // Usiamo toString() per estrarre il testo dell'allergia in modo sicuro
+                        String allergiaClean = allergia.toString().toLowerCase().trim();
+
+                        // Se la tua classe Allergia ha un metodo come getNome(), puoi usarlo sostituendo la riga sopra con:
+                        // String allergiaClean = allergia.getNome().toLowerCase().trim();
+
+                        // Controllo incrociato per evitare problemi di battitura o spazi
+                        if (allergiaClean.contains(principioAttivo) || principioAttivo.contains(allergiaClean)) {
+                            return true; // PERICOLO: Il paziente è allergico a questo farmaco!
+                        }
+                    }
+                }
             }
         }
 
-        // Se il ciclo termina senza blocchi, il farmaco non è pericoloso per il paziente
-        Prescrizione nuovaPrescrizione = new Prescrizione(idPrescrizione, durata, dosaggio,null, farmaco);
-        referto.getPrescrizioni().add(nuovaPrescrizione);
-
-        return true;
+        return false; // Tutto sicuro, nessuna allergia riscontrata
     }
 
     /*

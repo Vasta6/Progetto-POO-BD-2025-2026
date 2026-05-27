@@ -1,11 +1,12 @@
 package model;
 
 public class Farmaco {
-    private String codiceAIC, nomCommerciale, principioAttivo, obbligoRicetta;
+    private String codiceAIC, nomCommerciale, principioAttivo;
+    private boolean obbligoRicetta;
     private double prezzo;
 
 
-    public Farmaco(String codiceAIC, String nomCommerciale, String principioAttivo, String obbligoRicetta, double prezzo) {
+    public Farmaco(String codiceAIC, String nomCommerciale, String principioAttivo, boolean obbligoRicetta, double prezzo) {
         this.codiceAIC = codiceAIC;
         this.nomCommerciale = nomCommerciale;
         this.principioAttivo = principioAttivo;
@@ -37,11 +38,11 @@ public class Farmaco {
         this.principioAttivo = principioAttivo;
     }
 
-    public String getObbligoRicetta() {
+    public boolean getObbligoRicetta() {
         return obbligoRicetta;
     }
 
-    public void setObbligoRicetta(String obbligoRicetta) {
+    public void setObbligoRicetta(boolean obbligoRicetta) {
         this.obbligoRicetta = obbligoRicetta;
     }
 
@@ -51,5 +52,10 @@ public class Farmaco {
 
     public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
+    }
+
+    @Override
+    public String toString() {
+        return nomCommerciale + " " + principioAttivo + " " + prezzo ;
     }
 }
