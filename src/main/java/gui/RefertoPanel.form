@@ -110,6 +110,22 @@
           <text value="AGGIUNGI PRESCRIZIONE"/>
         </properties>
       </component>
+      <component id="6655b" class="javax.swing.JLabel" binding="idRef">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="IDReferto"/>
+        </properties>
+      </component>
+      <component id="8d08d" class="javax.swing.JLabel" binding="selPazienteLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Seleziona paziente"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

@@ -22,6 +22,8 @@ public class RefertoPanel extends JFrame {
     private JLabel prescrizioneLabel;
     private JLabel noteLabel;
     private JButton btnAggPrescr;
+    private JLabel idRef;
+    private JLabel selPazienteLabel;
     private Paziente pazienteDestinatario;
     private Controller controller;
     private Referto refertoCorrente;

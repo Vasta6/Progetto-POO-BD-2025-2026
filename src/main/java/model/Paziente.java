@@ -87,4 +87,9 @@ public class Paziente {
     public ArrayList<Referto> getCartellaClinica() {
         return cartellaClinica;
     }
+
+    @Override
+    public String toString() {
+        return nome + " " + cognome + " " + codiceFiscale;
+    }
 }
